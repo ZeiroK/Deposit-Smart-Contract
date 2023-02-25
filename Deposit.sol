@@ -9,7 +9,11 @@ contract DepositContract {
         // TO DO
         deposits[msg.sender] = deposits[msg.sender] + msg.value;
         totalDeposits = totalDeposits + msg.value;
-        emit Log("Deposit successful.");
+        if (deposits[msg.sender] == 0) {
+            emit Log("Nothing to deposit.");
+        } else {
+            emit Log("Deposit successful.");
+        }
     }
 
     function withdraw() public {
@@ -20,9 +24,13 @@ contract DepositContract {
             totalDeposits = totalDeposits - total;
             msg.sender.call{value: total}("");
             emit Log("Withdrawal successful.");
-        } 
-        else {
+        } else {
             emit Log("Nothing to withdraw.");
         }
+    }
+
+    function getTotalDeposits() public view returns (uint256) {
+        // TO DO
+        return totalDeposits;
     }
 }
