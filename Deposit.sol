@@ -25,3 +25,4 @@ contract DepositContract {
             emit Log("Nothing to withdraw.");
         }
     }
+}
